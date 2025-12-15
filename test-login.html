@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test de Login</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .form-group { margin: 15px 0; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        button { background: #007bff; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .result { margin: 20px 0; padding: 15px; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .info { background: #e2e3e5; color: #383d41; border: 1px solid #d6d8db; }
+    </style>
+</head>
+<body>
+    <h1>🔐 Prueba de Login</h1>
+    
+    <form id="loginForm">
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" value="test@test.com" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="password">Contraseña:</label>
+            <input type="password" id="password" value="123456" required>
+        </div>
+        
+        <button type="submit">Probar Login</button>
+    </form>
+    
+    <div id="resultado"></div>
+    
+    <h2>Otras credenciales para probar:</h2>
+    <div class="info">
+        <p><strong>test@test.com</strong> / 123456</p>
+        <p><strong>renzo@test.com</strong> / 123456</p>
+        <p><strong>admin@wait.com</strong> / admin123</p>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const resultado = document.getElementById('resultado');
+            
+            resultado.innerHTML = '<div class="info">Enviando petición de login...</div>';
+            
+            try {
+                const response = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultado.innerHTML = `
+                        <div class="success">
+                            <h3>✅ Login Exitoso!</h3>
+                            <p><strong>Email:</strong> ${data.email}</p>
+                            <p><strong>Límite de números:</strong> ${data.limiteNumeros}</p>
+                        </div>
+                    `;
+                } else {
+                    resultado.innerHTML = `
+                        <div class="error">
+                            <h3>❌ Error en Login</h3>
+                            <p><strong>Código:</strong> ${response.status}</p>
+                            <p><strong>Mensaje:</strong> ${data.error}</p>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                resultado.innerHTML = `
+                    <div class="error">
+                        <h3>💥 Error de Conexión</h3>
+                        <p><strong>Error:</strong> ${error.message}</p>
+                        <p>Posibles causas:</p>
+                        <ul>
+                            <li>El servidor no está funcionando</li>
+                            <li>La ruta /api/login no existe</li>
+                            <li>Problema de configuración</li>
+                        </ul>
+                    </div>
+                `;
+            }
+        });
+        
+        // Función para cambiar credenciales rápidamente
+        function probarCredenciales(email, password) {
+            document.getElementById('email').value = email;
+            document.getElementById('password').value = password;
+        }
+        
+        // Agregar botones para probar diferentes credenciales
+        document.addEventListener('DOMContentLoaded', function() {
+            const infoDiv = document.querySelector('.info');
+            infoDiv.innerHTML += `
+                <button onclick="probarCredenciales('test@test.com', '123456')" style="margin: 5px;">Probar test@test.com</button>
+                <button onclick="probarCredenciales('renzo@test.com', '123456')" style="margin: 5px;">Probar renzo@test.com</button>
+                <button onclick="probarCredenciales('admin@wait.com', 'admin123')" style="margin: 5px;">Probar admin@wait.com</button>
+            `;
+        });
+    </script>
+</body>
+</html>
