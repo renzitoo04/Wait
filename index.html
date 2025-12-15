@@ -150,6 +150,24 @@
             <label for="mensaje">Mensaje automático:</label>
             <input type="text" id="mensaje" placeholder="Ejemplo: Hola, necesito ayuda" aria-label="Mensaje automático">
 
+            <!-- Campos de Facebook Pixel -->
+            <h3 style="margin-top: 30px; color: #ff6b00;">📊 Facebook Ads (Opcional)</h3>
+            <label for="facebook-pixel-id">Facebook Pixel ID:</label>
+            <input type="text" id="facebook-pixel-id" placeholder="Ejemplo: 1234567890123456" aria-label="Facebook Pixel ID">
+
+            <label for="facebook-access-token">Facebook Access Token:</label>
+            <input type="text" id="facebook-access-token" placeholder="Ejemplo: EAAxxxxxxxxxxxxxxxx" aria-label="Facebook Access Token">
+
+            <label for="facebook-event-name">Nombre del Evento:</label>
+            <select id="facebook-event-name" aria-label="Nombre del Evento de Facebook">
+              <option value="Lead">Lead (Recomendado)</option>
+              <option value="ViewContent">ViewContent</option>
+              <option value="Contact">Contact</option>
+              <option value="InitiateCheckout">InitiateCheckout</option>
+              <option value="Purchase">Purchase</option>
+              <option value="CompleteRegistration">CompleteRegistration</option>
+            </select>
+
             <button type="button" onclick="generarLink()" aria-label="Generar Link">Generar Link</button>
           </form>
 
@@ -475,6 +493,12 @@
 
   const mensaje = document.getElementById('mensaje').value.trim();
   const email = localStorage.getItem('usuarioEmail'); // Obtener el email desde localStorage
+
+  // Obtener datos de Facebook Pixel
+  const facebookPixelId = document.getElementById('facebook-pixel-id').value.trim();
+  const facebookAccessToken = document.getElementById('facebook-access-token').value.trim();
+  const facebookEventName = document.getElementById('facebook-event-name').value;
+
   const generarButton = document.querySelector('button[onclick="generarLink()"]');
 
   if (!email) {
@@ -483,7 +507,7 @@
   }
 
   // Verificar si el límite de números es igual a 1
-  
+
 
   if (numeros.length === 0) {
     showNotification('Por favor, ingresa al menos un número válido.', 'error');
@@ -498,7 +522,14 @@
     const response = await fetch('/api/soporte', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, numeros, mensaje }), // Enviar el email en el cuerpo de la solicitud
+      body: JSON.stringify({
+        email,
+        numeros,
+        mensaje,
+        facebookPixelId,
+        facebookAccessToken,
+        facebookEventName
+      }), // Enviar el email y datos de Facebook en el cuerpo de la solicitud
     });
 
     const data = await response.json();
@@ -524,7 +555,11 @@
       // Mostrar el apartado de "Editar Link"
       mostrarEditarLink(numeros, mensaje);
 
-      showNotification('¡Link generado con éxito!');
+      if (facebookPixelId && facebookAccessToken) {
+        showNotification('¡Link generado con éxito y Facebook Pixel configurado! 🎯');
+      } else {
+        showNotification('¡Link generado con éxito!');
+      }
     } else {
       showNotification(data.error, 'error');
     }
