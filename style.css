@@ -3,7 +3,7 @@
     font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(135deg, #0a1128 0%, #1c2541 100%);
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
     background-attachment: fixed;
     color: #ffffff;
     line-height: 1.6;
@@ -44,13 +44,13 @@
 
   /* Enhanced header with subtle animation */
   header {
-  background: linear-gradient(to right, #1c2541, #3a506b);
+  background: linear-gradient(to right, #1a1a1a, #2a2a2a);
   padding: 18px 40px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   position: sticky;
   top: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(79, 195, 247, 0.2);
+  border-bottom: 1px solid rgba(255, 107, 0, 0.2);
   transition: padding 0.3s ease, box-shadow 0.3s ease;
   width: 100% !important;
   max-width: 100% !important;
@@ -73,7 +73,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(to right, #25d366, #4fc3f7);
+    background: linear-gradient(to right, #ff6b00, #ff9100);
   }
 
   .logo-container {
@@ -148,12 +148,12 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(to right, transparent, rgba(37, 211, 102, 0.6), transparent);
+    background: linear-gradient(to right, transparent, rgba(255, 107, 0, 0.6), transparent);
   }
 
   h3 {
     font-size: 1.4rem;
-    color: #25d366;
+    color: #ff6b00;
     margin-top: 10px;
   }
 
@@ -162,7 +162,7 @@
     max-width: 900px; /* Formulario más ancho */
     margin: 40px auto; /* Centrado con margen automático */
     padding: 50px; /* Mayor padding para más espacio interno */
-    background: linear-gradient(145deg, #1c2541, #202f54);
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
     border-radius: 20px; /* Bordes más redondeados para consistencia */
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Sombra más pronunciada */
     text-align: center; /* Centrado del contenido */
@@ -173,7 +173,7 @@
     left: 0; /* Asegurar que no haya desplazamiento horizontal */
     right: 0; /* Asegurar que no haya desplazamiento horizontal */
   }
-  
+
   form::before {
     content: '';
     position: absolute;
@@ -181,7 +181,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(to right, #25d366, #4fc3f7);
+    background: linear-gradient(to right, #ff6b00, #ff9100);
     border-radius: 4px 4px 0 0;
   }
 
@@ -224,15 +224,15 @@
 
   /* Hover para inputs del formulario */
   form input[type="text"]:hover:not(:focus) {
-    border-color: rgba(37, 211, 102, 0.3);
+    border-color: rgba(255, 107, 0, 0.3);
     background-color: rgba(47, 52, 81, 0.9);
   }
 
   /* Focus para inputs del formulario */
   form input[type="text"]:focus {
     outline: none;
-    border-color: #25d366;
-    box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-color: #ff6b00;
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
     background-color: rgba(47, 52, 81, 0.9);
   }
@@ -260,8 +260,8 @@
   }
   
   .numero-container:focus-within {
-    border-color: #25d366;
-    box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25);
+    border-color: #ff6b00;
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.25);
   }
   
   /* Input número dentro del contenedor */
@@ -285,8 +285,8 @@
 
   .numero:focus {
     outline: none;
-    border-color: #25d366;
-    box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-color: #ff6b00;
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
     background-color: rgba(47, 52, 81, 0.9);
   }
@@ -322,23 +322,23 @@
     padding: 16px 24px; /* Mayor padding */
     font-size: 1rem; /* Texto más grande */
     border-radius: 12px; /* Bordes más redondeados */
-    background: #25d366; /* Color verde para los botones */
+    background: #ff6b00; /* Color naranja para los botones */
     color: #ffffff; /* Texto blanco */
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.3); /* Sombra verde */
+    box-shadow: 0 6px 15px rgba(255, 107, 0, 0.3); /* Sombra naranja */
   }
 
   .button-group button:hover {
-    background: #1da851; /* Verde más oscuro al hover */
+    background: #ff9100; /* Naranja más claro al hover */
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
   }
 
   .button-group button:active {
     transform: translateY(1px);
-    box-shadow: 0 4px 8px rgba(37, 211, 102, 0.25);
+    box-shadow: 0 4px 8px rgba(255, 107, 0, 0.25);
   }
 
   /* Botón principal del formulario */
@@ -352,19 +352,19 @@
     border-radius: 12px; /* Bordes más redondeados */
     display: block; /* Asegurar centrado */
     box-sizing: border-box; /* Incluir padding en el cálculo */
-    background: #25d366; /* Color verde para el botón principal */
+    background: #ff6b00; /* Color naranja para el botón principal */
     color: #ffffff; /* Texto blanco */
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.3); /* Sombra verde */
+    box-shadow: 0 6px 15px rgba(255, 107, 0, 0.3); /* Sombra naranja */
   }
 
   /* Título del formulario */
   form h3 {
     font-size: 1.6rem; /* Título más grande */
     margin: 0 auto 30px auto; /* Centrado explícito y más espaciado debajo */
-    color: #25d366;
+    color: #ff6b00;
     text-align: center;
     max-width: 700px; /* Consistente con otros elementos */
     width: 100%; /* Ancho completo hasta el máximo */
@@ -375,7 +375,7 @@
     max-width: 800px; /* Wider for desktop */
     margin: 30px auto;
     padding: 30px; /* More padding for desktop */
-    background: linear-gradient(145deg, #1c2541, #202f54);
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
     text-align: center;
@@ -383,7 +383,7 @@
     position: relative;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-  
+
   .output::before {
     content: '';
     position: absolute;
@@ -391,7 +391,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(to right, #25d366, #4fc3f7);
+    background: linear-gradient(to right, #ff6b00, #ff9100);
     border-radius: 3px 3px 0 0;
   }
 
@@ -401,22 +401,22 @@
   }
 
   .output a {
-    color: #4fc3f7;
+    color: #ff9100;
     text-decoration: none;
     font-weight: bold;
     transition: all 0.3s ease;
     padding: 8px 16px;
     border-radius: 6px;
-    background-color: rgba(79, 195, 247, 0.1);
+    background-color: rgba(255, 107, 0, 0.1);
     display: inline-block;
     margin-top: 10px;
-    border: 1px solid rgba(79, 195, 247, 0.2);
+    border: 1px solid rgba(255, 107, 0, 0.2);
   }
 
   .output a:hover {
-    color: #b3e5fc;
+    color: #ffb800;
     text-decoration: none;
-    background-color: rgba(79, 195, 247, 0.2);
+    background-color: rgba(255, 107, 0, 0.2);
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
@@ -483,8 +483,8 @@
 
   .numero:focus {
     outline: none;
-    border-color: #25d366;
-    box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-color: #ff6b00;
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.05);
     transform: translateY(-2px);
   }
 
@@ -495,19 +495,19 @@
     margin: 60px auto;
     padding: 50px 40px;
     box-sizing: border-box;
-    background: linear-gradient(145deg, #1a1f3a, #1c2541);
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
     border-radius: 20px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
     text-align: center;
     position: relative;
     overflow: hidden;
   }
-  
+
   #login-container:hover {
     transform: translateY(-5px);
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.07);
   }
-  
+
   #login-container::before {
     content: '';
     position: absolute;
@@ -515,7 +515,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(to right, #25d366, #4fc3f7);
+    background: linear-gradient(to right, #ff6b00, #ff9100);
     border-radius: 4px 4px 0 0;
   }
 
@@ -538,7 +538,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(to right, transparent, rgba(37, 211, 102, 0.6), transparent);
+    background: linear-gradient(to right, transparent, rgba(255, 107, 0, 0.6), transparent);
   }
 
   /* Labels específicos para el login - improved */
@@ -558,7 +558,7 @@
   }
   
   #login-container label:focus-within {
-    color: #25d366;
+    color: #ff6b00;
     transform: translateX(5px);
   }
 
@@ -582,15 +582,15 @@
   
   #login-container input[type="email"]:hover,
   #login-container input[type="password"]:hover {
-    border-color: rgba(37, 211, 102, 0.3);
+    border-color: rgba(255, 107, 0, 0.3);
     background-color: rgba(47, 52, 81, 0.9);
   }
-  
+
   #login-container input[type="email"]:focus,
   #login-container input[type="password"]:focus {
     outline: none;
-    border-color: #25d366;
-    box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-color: #ff6b00;
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
     background-color: rgba(47, 52, 81, 0.9);
   }
@@ -615,12 +615,12 @@
     font-size: 1.1rem;
     font-weight: bold;
     color: #ffffff;
-    background: linear-gradient(to right, #25d366, #1da851);
+    background: linear-gradient(to right, #ff6b00, #ff9100);
     border: none;
     border-radius: 12px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 6px 20px rgba(255, 107, 0, 0.3);
     text-transform: uppercase;
     letter-spacing: 1px;
     font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
@@ -629,16 +629,16 @@
     box-sizing: border-box;
     display: block;
   }
-  
+
   #login-container button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-    background: linear-gradient(to right, #1da851, #25d366);
+    box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+    background: linear-gradient(to right, #ff9100, #ffb800);
   }
-  
+
   #login-container button:active {
     transform: translateY(1px);
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
   }
   
   #login-container button::before {
@@ -683,8 +683,8 @@
     bottom: 30px;
     right: 30px;
     padding: 15px 25px;
-    background: linear-gradient(145deg, #1c2541, #202f54);
-    border-left: 4px solid #25d366;
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+    border-left: 4px solid #ff6b00;
     color: white;
     border-radius: 8px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
@@ -709,8 +709,8 @@
   margin-top: 60px;
   padding: 30px 0;
   text-align: center;
-  background: linear-gradient(145deg, rgba(28, 37, 65, 0.9), rgba(32, 47, 84, 0.9));
-  border-top: 1px solid rgba(79, 195, 247, 0.2);
+  background: linear-gradient(145deg, rgba(26, 26, 26, 0.9), rgba(13, 13, 13, 0.9));
+  border-top: 1px solid rgba(255, 107, 0, 0.2);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   width: 100% !important;   /* fuerza que ocupe todo el ancho */
@@ -732,7 +732,7 @@
   }
   
   footer .copyright {
-    color: #25d366;
+    color: #ff6b00;
     font-weight: 600;
     font-size: 1.05rem;
     letter-spacing: 0.5px;
@@ -756,8 +756,8 @@
   }
   
   footer a:hover {
-    color: #4fc3f7;
-    background-color: rgba(79, 195, 247, 0.1);
+    color: #ff9100;
+    background-color: rgba(255, 107, 0, 0.1);
   }
   
   footer a:not(:last-child)::after {
@@ -844,7 +844,7 @@
   }
 
   .modal-container {
-    background: linear-gradient(145deg, #0f172a, #1e293b); /* Fondo más oscuro */
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d); /* Fondo más oscuro */
     border-radius: 16px;
     padding: 30px;
     width: 90%;
@@ -869,7 +869,7 @@
   }
 
   .plan-card {
-    background: linear-gradient(145deg, #1c2541, #202f54); /* Fondo degradado */
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d); /* Fondo degradado */
     border-radius: 12px;
     padding: 25px;
     margin-bottom: 20px;
@@ -885,7 +885,7 @@
   .plan-name {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #25d366;
+    color: #ff6b00;
     margin-bottom: 15px;
   }
 
@@ -898,8 +898,8 @@
   .plan-price .price-amount {
     font-size: 3.5rem; /* Tamaño más grande */
     font-weight: bold;
-    color: #25d366;
-    background: rgba(37, 211, 102, 0.2); /* Fondo verde claro */
+    color: #ff6b00;
+    background: rgba(255, 107, 0, 0.2); /* Fondo naranja claro */
     padding: 20px 30px; /* Más espacio alrededor */
     border-radius: 12px; /* Bordes redondeados */
     display: inline-block;
@@ -929,7 +929,7 @@
 
   .plan-features li::before {
     content: '✔';
-    color: #25d366;
+    color: #ff6b00;
     margin-right: 10px;
     font-size: 1.2rem;
   }
@@ -948,25 +948,25 @@
   justify-content: center;
   gap: 10px; /* Espacio entre el logo y el texto */
   padding: 14px 24px; /* Más espacio interno */
-  background: linear-gradient(135deg, #25d366, #128C7E); /* Colores de WhatsApp */
+  background: linear-gradient(135deg, #ff6b00, #ff9100); /* Colores naranja */
   color: #ffffff;
   font-weight: bold;
   font-size: 1.1rem;
   border-radius: 12px; /* Bordes redondeados */
   text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4); /* Sombra verde */
+  box-shadow: 0 6px 15px rgba(255, 107, 0, 0.4); /* Sombra naranja */
 }
 
 .whatsapp-button:hover {
-  background: linear-gradient(135deg, #1da851, #0d6f5a); /* Verde más oscuro al hover */
+  background: linear-gradient(135deg, #ff9100, #ffb800); /* Naranja más claro al hover */
   transform: translateY(-3px); /* Efecto de elevación */
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5); /* Sombra más pronunciada */
+  box-shadow: 0 8px 20px rgba(255, 107, 0, 0.5); /* Sombra más pronunciada */
 }
 
 .whatsapp-button:active {
   transform: translateY(1px); /* Efecto de clic */
-  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3); /* Sombra reducida */
+  box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3); /* Sombra reducida */
 }
 
 /* Botón de Mercado Pago */
@@ -976,25 +976,25 @@
   justify-content: center;
   gap: 10px; /* Espacio entre el logo y el texto */
   padding: 14px 24px; /* Más espacio interno */
-  background: linear-gradient(135deg, #009ee3, #007bbd); /* Colores de Mercado Pago */
+  background: linear-gradient(135deg, #ff6b00, #ff9100); /* Colores naranja */
   color: #ffffff;
   font-weight: bold;
   font-size: 1.1rem;
   border-radius: 12px; /* Bordes redondeados */
   text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 15px rgba(0, 158, 227, 0.4); /* Sombra azul */
+  box-shadow: 0 6px 15px rgba(255, 107, 0, 0.4); /* Sombra naranja */
 }
 
 .mercadopago-button:hover {
-  background: linear-gradient(135deg, #007bbd, #005f99); /* Azul más oscuro al hover */
+  background: linear-gradient(135deg, #ff9100, #ffb800); /* Naranja más claro al hover */
   transform: translateY(-3px); /* Efecto de elevación */
-  box-shadow: 0 8px 20px rgba(0, 158, 227, 0.5); /* Sombra más pronunciada */
+  box-shadow: 0 8px 20px rgba(255, 107, 0, 0.5); /* Sombra más pronunciada */
 }
 
 .mercadopago-button:active {
   transform: translateY(1px); /* Efecto de clic */
-  box-shadow: 0 4px 10px rgba(0, 158, 227, 0.3); /* Sombra reducida */
+  box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3); /* Sombra reducida */
 }
 
 /* Estilo para el ícono dentro del botón */
@@ -1011,7 +1011,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px 30px;
-    background: linear-gradient(145deg, #1c2541, #202f54);
+    background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
     border-radius: 16px;
     margin-bottom: 30px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
@@ -1020,18 +1020,18 @@
     align-self: center;
     box-sizing: border-box;
   }
-  
+
   .user-info {
     display: flex;
     align-items: center;
     gap: 15px;
   }
-  
+
   .user-avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #25d366, #128C7E);
+    background: linear-gradient(135deg, #ff6b00, #ff9100);
     color: white;
     font-weight: 600;
     font-size: 1.4rem;
@@ -1085,7 +1085,7 @@
 
   /* Premium Plans button styling */
   .plans-button {
-    background: linear-gradient(135deg, #25d366 0%, #128C7E 100%);
+    background: linear-gradient(135deg, #ff6b00 0%, #ff9100 100%);
     border: none;
     border-radius: 12px;
     padding: 10px 18px;
@@ -1097,7 +1097,7 @@
     align-items: center;
     gap: 8px;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3);
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -1110,9 +1110,9 @@
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, 
-      rgba(255, 255, 255, 0) 0%, 
-      rgba(255, 255, 255, 0.2) 50%, 
+    background: linear-gradient(90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
       rgba(255, 255, 255, 0) 100%
     );
     transition: left 0.7s ease;
@@ -1121,8 +1121,8 @@
 
   .plans-button:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.4);
-    background: linear-gradient(135deg, #1da851 0%, #0d7164 100%);
+    box-shadow: 0 6px 15px rgba(255, 107, 0, 0.4);
+    background: linear-gradient(135deg, #ff9100 0%, #ffb800 100%);
   }
 
   .plans-button:hover:before {
@@ -1131,7 +1131,7 @@
 
   .plans-button:active {
     transform: translateY(1px);
-    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 2px 8px rgba(255, 107, 0, 0.3);
   }
 
   .plans-button span {
@@ -1174,7 +1174,7 @@
   #editar-link-container h3 {
     font-size: 1.8rem;
     margin-bottom: 25px;
-    color: #25d366;
+    color: #ff6b00;
     text-align: center;
     font-weight: 700;
   }
@@ -1202,7 +1202,7 @@
     left: 0;
     right: 0;
     height: 2px;
-    background: linear-gradient(to right, transparent, rgba(37, 211, 102, 0.6), transparent);
+    background: linear-gradient(to right, transparent, rgba(255, 107, 0, 0.6), transparent);
   }
 
   .message-label {
@@ -1242,8 +1242,8 @@
   
   .message-input:focus {
     outline: none;
-    border-color: #25d366;
-    box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-color: #ff6b00;
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
     background-color: rgba(47, 52, 81, 0.9);
   }
@@ -1272,21 +1272,21 @@
   }
   
   .btn-primary {
-    background: #25d366;
+    background: #ff6b00;
     color: #ffffff;
     border: none;
-    box-shadow: 0 6px 15px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 6px 15px rgba(255, 107, 0, 0.3);
   }
-  
+
   .btn-primary:hover {
-    background: #1da851;
+    background: #ff9100;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+    box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
   }
-  
+
   .btn-primary:active {
     transform: translateY(1px);
-    box-shadow: 0 4px 8px rgba(37, 211, 102, 0.25);
+    box-shadow: 0 4px 8px rgba(255, 107, 0, 0.25);
   }
   
   .btn-secondary {
@@ -1327,8 +1327,8 @@
 
   #editar-mensaje:focus {
     outline: none;
-    border-color: #25d366;
-    box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-color: #ff6b00;
+    box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
     background-color: rgba(47, 52, 81, 0.9);
   }
@@ -1346,23 +1346,23 @@
   font-size: 1.2rem;
   font-weight: bold;
   border-radius: 12px;
-  background: #25d366; /* Color verde llamativo */
+  background: #ff6b00; /* Color naranja llamativo */
   color: #ffffff;
   border: none;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 15px rgba(37, 211, 102, 0.3); /* Sombra verde */
+  box-shadow: 0 6px 15px rgba(255, 107, 0, 0.3); /* Sombra naranja */
 }
 
 #editar-link-container button:hover {
-  background: #1da851; /* Verde más oscuro al hover */
+  background: #ff9100; /* Naranja más claro al hover */
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+  box-shadow: 0 8px 20px rgba(255, 107, 0, 0.4);
 }
 
 #editar-link-container button:active {
   transform: translateY(1px);
-  box-shadow: 0 4px 8px rgba(37, 211, 102, 0.25);
+  box-shadow: 0 4px 8px rgba(255, 107, 0, 0.25);
 }
 
 #login-info {
@@ -1377,7 +1377,7 @@
   width: 100px; /* Tamaño del contenedor */
   height: 100px; /* Tamaño del contenedor */
   margin: 0 auto; /* Centrar horizontalmente */
-  background: linear-gradient(145deg, #25d366, #1da851); /* Fondo degradado */
+  background: linear-gradient(145deg, #ff6b00, #ff9100); /* Fondo degradado naranja */
   color: #ffffff; /* Color del texto */
   font-size: 3rem; /* Tamaño del número */
   font-weight: bold; /* Negrita */
@@ -1425,7 +1425,7 @@
   margin: 60px auto;
   padding: 50px 40px;
   box-sizing: border-box;
-  background: linear-gradient(145deg, #1a1f3a, #1c2541);
+  background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
   border-radius: 20px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
   text-align: center;
@@ -1457,14 +1457,14 @@
 
 /* Hover y focus para inputs */
 #registro-container input:hover {
-  border-color: rgba(37, 211, 102, 0.3);
+  border-color: rgba(255, 107, 0, 0.3);
   background-color: rgba(47, 52, 81, 0.9);
 }
 
 #registro-container input:focus {
   outline: none;
-  border-color: #25d366;
-  box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-color: #ff6b00;
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.25), inset 0 2px 4px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
   background-color: rgba(47, 52, 81, 0.9);
 }
@@ -1477,12 +1477,12 @@
   font-size: 1.1rem;
   font-weight: bold;
   color: #ffffff;
-  background: linear-gradient(to right, #25d366, #1da851);
+  background: linear-gradient(to right, #ff6b00, #ff9100);
   border: none;
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 6px 20px rgba(255, 107, 0, 0.3);
 }
 
 /* Centrar el botón de 'Registrarse' */
@@ -1494,13 +1494,13 @@
 
 #registro-container button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-  background: linear-gradient(to right, #1da851, #25d366);
+  box-shadow: 0 8px 25px rgba(255, 107, 0, 0.4);
+  background: linear-gradient(to right, #ff9100, #ffb800);
 }
 
 #registro-container button:active {
   transform: translateY(1px);
-  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
 }
 .password-container {
   position: relative;
@@ -1534,25 +1534,25 @@
   justify-content: center;
   gap: 10px;
   padding: 14px 24px;
-  background: linear-gradient(135deg, #4caf50, #2e7d32); /* Verde tipo tarjeta */
+  background: linear-gradient(135deg, #ff6b00, #ff9100); /* Naranja */
   color: #ffffff;
   font-weight: bold;
   font-size: 1.1rem;
   border-radius: 12px; /* Bordes redondeados */
   text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+  box-shadow: 0 6px 15px rgba(255, 107, 0, 0.4);
 }
 
 .debito-button:hover {
-  background: linear-gradient(135deg, #388e3c, #1b5e20);
+  background: linear-gradient(135deg, #ff9100, #ffb800);
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.5);
+  box-shadow: 0 8px 20px rgba(255, 107, 0, 0.5);
 }
 
 .debito-button:active {
   transform: translateY(1px);
-  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+  box-shadow: 0 4px 10px rgba(255, 107, 0, 0.3);
 }
 
 /* Estilo para el botón de 'Volver al inicio' */
