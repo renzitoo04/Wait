@@ -1,5 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
+import bcrypt from 'bcrypt';
+
 dotenv.config();
 
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
@@ -27,7 +29,9 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Usuario no encontrado' });
     }
 
-    if (usuario.password.trim() !== password.trim()) {
+    // Comparar contraseñas usando bcrypt
+    const passwordMatch = await bcrypt.compare(password.trim(), usuario.password);
+    if (!passwordMatch) {
       return res.status(401).json({ error: 'Contraseña incorrecta' });
     }
 
