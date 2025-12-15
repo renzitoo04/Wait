@@ -21,6 +21,54 @@ async function acortarLink(linkOriginal) {
   }
 }
 
+// ✅ Función para enviar evento a Facebook Conversions API
+async function enviarEventoFacebook({ pixelId, accessToken, eventName, ip, userAgent, referer, fbp, fbc }) {
+  try {
+    if (!pixelId || !accessToken) {
+      console.log('Facebook Pixel no configurado, omitiendo evento');
+      return;
+    }
+
+    const eventData = {
+      data: [{
+        event_name: eventName || 'Lead',
+        event_time: Math.floor(Date.now() / 1000),
+        action_source: 'website',
+        event_source_url: referer || '',
+        user_data: {
+          client_ip_address: ip,
+          client_user_agent: userAgent
+        }
+      }]
+    };
+
+    // Agregar cookies de Facebook si existen
+    if (fbp) eventData.data[0].user_data.fbp = fbp;
+    if (fbc) eventData.data[0].user_data.fbc = fbc;
+
+    const url = `https://graph.facebook.com/v21.0/${pixelId}/events?access_token=${accessToken}`;
+
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(eventData)
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      console.log('✅ Evento enviado a Facebook:', result);
+    } else {
+      console.error('❌ Error al enviar evento a Facebook:', result);
+    }
+  } catch (error) {
+    console.error('❌ Error en enviarEventoFacebook:', error);
+    // No lanzar error para no romper el flujo de redirección
+  }
+}
+
 export default async function handler(req, res) {
   // 🔹 Crear nuevo link
   if (req.method === 'POST') {
@@ -106,9 +154,10 @@ export default async function handler(req, res) {
     if (!id) return res.status(400).json({ error: 'Falta el ID del link.' });
 
     try {
+      // Obtener datos del link incluyendo el email del dueño
       const { data: linkData, error } = await supabase
         .from('link')
-        .select('numeros, mensaje')
+        .select('numeros, mensaje, email')
         .eq('id', id)
         .single();
 
@@ -116,17 +165,49 @@ export default async function handler(req, res) {
         return res.status(404).json({ error: 'No se encontró el link.' });
       }
 
+      // Extraer datos del request para tracking
+      const ip = String((req.headers['x-forwarded-for'] || req.socket.remoteAddress || '')).split(',')[0].trim();
+      const userAgent = req.headers['user-agent'] || '';
+      const referer = req.headers['referer'] || req.headers['referrer'] || '';
+
+      // Extraer cookies _fbp y _fbc
+      const cookies = req.headers.cookie?.split(';').reduce((acc, cookie) => {
+        const [key, value] = cookie.trim().split('=');
+        acc[key] = value;
+        return acc;
+      }, {}) || {};
+      const fbp = cookies._fbp;
+      const fbc = cookies._fbc;
+
       // Registrar el click (asincrónicamente)
       (async () => {
         try {
-          const ip = String((req.headers['x-forwarded-for'] || req.socket.remoteAddress || '')).split(',')[0].trim();
-          const ua = req.headers['user-agent'] || '';
-          const referer = req.headers['referer'] || req.headers['referrer'] || '';
-          await supabase.from('clicks').insert([{ link_id: id, ip, ua, referer }]);
+          await supabase.from('clicks').insert([{ link_id: id, ip, ua: userAgent, referer }]);
         } catch (e) {
           console.error('No se pudo registrar el click:', e);
         }
       })();
+
+      // Obtener configuración de Facebook del usuario dueño del link
+      const { data: usuario } = await supabase
+        .from('usuarios')
+        .select('facebook_pixel_id, facebook_access_token, facebook_event_name')
+        .eq('email', linkData.email)
+        .single();
+
+      // Enviar evento a Facebook si está configurado (sin bloquear la redirección)
+      if (usuario && usuario.facebook_pixel_id && usuario.facebook_access_token) {
+        enviarEventoFacebook({
+          pixelId: usuario.facebook_pixel_id,
+          accessToken: usuario.facebook_access_token,
+          eventName: usuario.facebook_event_name || 'Lead',
+          ip,
+          userAgent,
+          referer,
+          fbp,
+          fbc
+        }).catch(err => console.error('Error enviando evento a Facebook:', err));
+      }
 
       // Rotación entre números
       if (!indicesRotacion[id]) indicesRotacion[id] = 0;
