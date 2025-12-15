@@ -151,22 +151,31 @@
             <input type="text" id="mensaje" placeholder="Ejemplo: Hola, necesito ayuda" aria-label="Mensaje automático">
 
             <!-- Campos de Facebook Pixel -->
-            <h3 style="margin-top: 30px; color: #ff6b00;">📊 Facebook Ads (Opcional)</h3>
-            <label for="facebook-pixel-id">Facebook Pixel ID:</label>
-            <input type="text" id="facebook-pixel-id" placeholder="Ejemplo: 1234567890123456" aria-label="Facebook Pixel ID">
+            <div class="facebook-section">
+              <h3 class="facebook-title">
+                <span class="facebook-icon">📊</span>
+                Facebook Ads Tracking
+                <span class="optional-badge">Opcional</span>
+              </h3>
 
-            <label for="facebook-access-token">Facebook Access Token:</label>
-            <input type="text" id="facebook-access-token" placeholder="Ejemplo: EAAxxxxxxxxxxxxxxxx" aria-label="Facebook Access Token">
+              <div class="facebook-fields">
+                <label for="facebook-pixel-id" class="fb-label">Facebook Pixel ID:</label>
+                <input type="text" id="facebook-pixel-id" class="fb-input" placeholder="Ejemplo: 1234567890123456" aria-label="Facebook Pixel ID">
 
-            <label for="facebook-event-name">Nombre del Evento:</label>
-            <select id="facebook-event-name" aria-label="Nombre del Evento de Facebook">
-              <option value="Lead">Lead (Recomendado)</option>
-              <option value="ViewContent">ViewContent</option>
-              <option value="Contact">Contact</option>
-              <option value="InitiateCheckout">InitiateCheckout</option>
-              <option value="Purchase">Purchase</option>
-              <option value="CompleteRegistration">CompleteRegistration</option>
-            </select>
+                <label for="facebook-access-token" class="fb-label">Facebook Access Token:</label>
+                <input type="text" id="facebook-access-token" class="fb-input" placeholder="Ejemplo: EAAxxxxxxxxxxxxxxxx" aria-label="Facebook Access Token">
+
+                <label for="facebook-event-name" class="fb-label">Nombre del Evento:</label>
+                <select id="facebook-event-name" class="fb-select" aria-label="Nombre del Evento de Facebook">
+                  <option value="Lead">Lead (Recomendado)</option>
+                  <option value="ViewContent">ViewContent</option>
+                  <option value="Contact">Contact</option>
+                  <option value="InitiateCheckout">InitiateCheckout</option>
+                  <option value="Purchase">Purchase</option>
+                  <option value="CompleteRegistration">CompleteRegistration</option>
+                </select>
+              </div>
+            </div>
 
             <button type="button" onclick="generarLink()" aria-label="Generar Link">Generar Link</button>
           </form>
@@ -192,6 +201,33 @@
             <h3>Editar Link</h3>
             <div id="editar-numeros-container"></div>
             <textarea id="editar-mensaje" placeholder="Editar mensaje automático"></textarea>
+
+            <!-- Campos de Facebook Pixel en Editar -->
+            <div class="facebook-section" style="margin-top: 20px;">
+              <h4 class="facebook-title" style="font-size: 18px;">
+                <span class="facebook-icon">📊</span>
+                Facebook Ads Tracking
+              </h4>
+
+              <div class="facebook-fields">
+                <label for="editar-facebook-pixel-id" class="fb-label">Facebook Pixel ID:</label>
+                <input type="text" id="editar-facebook-pixel-id" class="fb-input" placeholder="Ejemplo: 1234567890123456">
+
+                <label for="editar-facebook-access-token" class="fb-label">Facebook Access Token:</label>
+                <input type="text" id="editar-facebook-access-token" class="fb-input" placeholder="Ejemplo: EAAxxxxxxxxxxxxxxxx">
+
+                <label for="editar-facebook-event-name" class="fb-label">Nombre del Evento:</label>
+                <select id="editar-facebook-event-name" class="fb-select">
+                  <option value="Lead">Lead (Recomendado)</option>
+                  <option value="ViewContent">ViewContent</option>
+                  <option value="Contact">Contact</option>
+                  <option value="InitiateCheckout">InitiateCheckout</option>
+                  <option value="Purchase">Purchase</option>
+                  <option value="CompleteRegistration">CompleteRegistration</option>
+                </select>
+              </div>
+            </div>
+
             <button onclick="actualizarLink()">Actualizar Link</button>
           </div>
           
@@ -606,6 +642,11 @@
       .map(input => input.value.trim())
       .filter(num => num !== '' && num !== '+549'); // Obtener los números actualizados y filtrar valores inválidos
 
+    // Obtener datos de Facebook Pixel del formulario de editar
+    const facebookPixelId = document.getElementById('editar-facebook-pixel-id').value.trim();
+    const facebookAccessToken = document.getElementById('editar-facebook-access-token').value.trim();
+    const facebookEventName = document.getElementById('editar-facebook-event-name').value;
+
     const actualizarButton = document.querySelector('button[onclick="actualizarLink()"]');
 
     if (!email || !id) {
@@ -626,7 +667,15 @@
       const response = await fetch('/api/soporte', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, id, numeros, mensaje }), // Enviar los datos al backend
+        body: JSON.stringify({
+          email,
+          id,
+          numeros,
+          mensaje,
+          facebookPixelId,
+          facebookAccessToken,
+          facebookEventName
+        }), // Enviar los datos al backend incluyendo Facebook Pixel
       });
 
       const data = await response.json();
@@ -641,7 +690,11 @@
         document.getElementById('mensaje-generado').textContent = mensaje || 'Sin mensaje';
 
         // Mostrar notificación de éxito
-        showNotification('¡Link actualizado correctamente!');
+        if (facebookPixelId && facebookAccessToken) {
+          showNotification('¡Link y Facebook Pixel actualizados correctamente! 🎯');
+        } else {
+          showNotification('¡Link actualizado correctamente!');
+        }
     } else {
       showNotification('¡Link actualizado correctamente!');
     }
@@ -722,6 +775,26 @@
 
   if (email) {
     try {
+      // Recuperar los datos del usuario (incluyendo Facebook Pixel)
+      const usuarioResponse = await fetch(`/api/usuarios?email=${email}`);
+      if (usuarioResponse.ok) {
+        const usuarioData = await usuarioResponse.json();
+
+        // Cargar datos de Facebook Pixel si existen
+        if (usuarioData.facebook_pixel_id) {
+          document.getElementById('editar-facebook-pixel-id').value = usuarioData.facebook_pixel_id;
+          document.getElementById('facebook-pixel-id').value = usuarioData.facebook_pixel_id;
+        }
+        if (usuarioData.facebook_access_token) {
+          document.getElementById('editar-facebook-access-token').value = usuarioData.facebook_access_token;
+          document.getElementById('facebook-access-token').value = usuarioData.facebook_access_token;
+        }
+        if (usuarioData.facebook_event_name) {
+          document.getElementById('editar-facebook-event-name').value = usuarioData.facebook_event_name;
+          document.getElementById('facebook-event-name').value = usuarioData.facebook_event_name;
+        }
+      }
+
       // Recuperar los datos del link desde Supabase
       const linkResponse = await fetch(`/api/link?email=${email}`);
 
@@ -735,7 +808,7 @@
         showNotification('Tu suscripción ha vencido. Renueva tu plan para ver el link.', 'error');
       }
 
-      
+
 
       if (linkResponse.ok) {
         const linkData = await linkResponse.json();
@@ -1010,6 +1083,160 @@ document.getElementById('registro-form').addEventListener('submit', async functi
   });
 
   </script>
+
+  <style>
+/* ========================================
+   ESTILOS FACEBOOK ADS (NARANJA + NEGRO)
+   ======================================== */
+.facebook-section {
+  background: linear-gradient(145deg, #1a1a1a 0%, #0d0d0d 100%);
+  border: 2px solid #ff6b00;
+  border-radius: 15px;
+  padding: 25px;
+  margin: 30px 0;
+  position: relative;
+  box-shadow:
+    0 10px 30px rgba(255, 107, 0, 0.2),
+    inset 0 0 20px rgba(255, 107, 0, 0.05);
+  animation: fadeInUp 0.5s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.facebook-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #ff6b00, #ff9100, #ff6b00);
+  border-radius: 15px 15px 0 0;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.facebook-title {
+  color: #ff6b00;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(255, 107, 0, 0.3);
+}
+
+.facebook-icon {
+  font-size: 24px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.optional-badge {
+  background: linear-gradient(135deg, #ff6b00, #ff9100);
+  color: #0a0a0a;
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  margin-left: auto;
+  box-shadow: 0 2px 10px rgba(255, 107, 0, 0.4);
+}
+
+.facebook-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.fb-label {
+  color: #ff9100 !important;
+  font-weight: 600 !important;
+  font-size: 14px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.fb-input,
+.fb-select {
+  background: #0a0a0a !important;
+  border: 2px solid #ff6b00 !important;
+  color: #ffffff !important;
+  padding: 12px 15px !important;
+  border-radius: 10px !important;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.fb-input:focus,
+.fb-select:focus {
+  outline: none;
+  border-color: #ff9100 !important;
+  box-shadow:
+    0 0 0 3px rgba(255, 107, 0, 0.2),
+    inset 0 2px 5px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+.fb-input::placeholder {
+  color: #666 !important;
+  font-style: italic;
+}
+
+.fb-select option {
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 10px;
+}
+
+/* Responsive para móviles */
+@media (max-width: 768px) {
+  .facebook-section {
+    padding: 20px 15px;
+    margin: 20px 0;
+  }
+
+  .facebook-title {
+    font-size: 16px;
+    flex-wrap: wrap;
+  }
+
+  .optional-badge {
+    font-size: 10px;
+    padding: 3px 8px;
+  }
+
+  .fb-input,
+  .fb-select {
+    padding: 10px 12px !important;
+    font-size: 13px;
+  }
+}
+
+  </style>
   <style>
 /* Media queries mejoradas para móviles */
 @media (max-width: 768px) {

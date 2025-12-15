@@ -672,7 +672,7 @@ export default async function handler(req, res) {
 
   // 🔹 Actualizar link existente
   if (req.method === 'PATCH') {
-    const { email, id, numeros, mensaje } = req.body;
+    const { email, id, numeros, mensaje, facebookPixelId, facebookAccessToken, facebookEventName } = req.body;
 
     if (!email || !id || !numeros || numeros.length === 0) {
       return res.status(400).json({ error: 'Datos inválidos. Asegúrate de enviar el email, ID, números y mensaje.' });
@@ -685,6 +685,25 @@ export default async function handler(req, res) {
 
     if (numerosValidos.length === 0) {
       return res.status(400).json({ error: 'No se encontraron números válidos.' });
+    }
+
+    // Actualizar datos de Facebook Pixel en tabla usuarios (si se proporcionaron)
+    if (facebookPixelId || facebookAccessToken || facebookEventName) {
+      try {
+        const updateData = {};
+        if (facebookPixelId) updateData.facebook_pixel_id = facebookPixelId;
+        if (facebookAccessToken) updateData.facebook_access_token = facebookAccessToken;
+        if (facebookEventName) updateData.facebook_event_name = facebookEventName;
+
+        await supabase
+          .from('usuarios')
+          .update(updateData)
+          .eq('email', email);
+
+        console.log('✅ Datos de Facebook Pixel actualizados para:', email);
+      } catch (error) {
+        console.error('❌ Error actualizando Facebook Pixel:', error);
+      }
     }
 
     try {
